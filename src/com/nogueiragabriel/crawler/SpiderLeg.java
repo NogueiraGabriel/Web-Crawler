@@ -11,6 +11,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.nogueiragabriel.util.CSVUtils;
+
 public class SpiderLeg
 {
     // We'll use a fake USER_AGENT so the web server thinks the robot is a normal web browser.
@@ -52,6 +54,9 @@ public class SpiderLeg
             System.out.println("Company name: " + name );
             System.out.println("Found tel number: " + tel);
             System.out.println("Company adress: " + adress);
+            
+            CSVUtils csv = new CSVUtils();
+            csv.WriteLine(company);
             
             return true;
         } catch(Exception e) {
