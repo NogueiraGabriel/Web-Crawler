@@ -11,17 +11,14 @@ public class Spider
   private Set<String> pagesVisited = new HashSet<String>();
   private List<String> pagesToVisit = new LinkedList<String>();
 
-
   /**
    * Our main launching point for the Spider's functionality. Internally it creates spider legs
    * that make an HTTP request and parse the response (the web page).
    * 
    * @param url
    *            - The starting point of the spider
-   * @param searchWord
-   *            - The word or string that you are searching for
    */
-  public void search(String url, String searchWord) {
+  public void search(String url) {
       while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH) {
           String currentUrl;
           SpiderLeg leg = new SpiderLeg();
@@ -34,10 +31,7 @@ public class Spider
           }
           leg.crawl(currentUrl); // Lots of stuff happening here. Look at the crawl method in
                                  // SpiderLeg
-          /*boolean success = leg.searchForWord(searchWord);
-          if(success) {
-              System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
-          }*/
+         
           this.pagesToVisit.addAll(leg.getLinks());
       }
       System.out.println("\n**Done** Visited " + this.pagesVisited.size() + " web page(s)");
